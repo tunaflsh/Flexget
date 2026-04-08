@@ -18,7 +18,7 @@ def before_config_load(manager):
 
 def pre_check_config(config_path):
     """Check configuration file for common mistakes that are easily detectable."""
-    with codecs.open(config_path, 'r', 'utf-8') as config_file:
+    with open(config_path, 'r', encoding='utf-8') as config_file:
         try:
             config = config_file.read()
         except UnicodeDecodeError:
@@ -147,7 +147,7 @@ def check(manager, options):
     if manager.is_daemon:
         # If we are running in a daemon, check disk config
         pre_check_config(manager.config_path)
-        with codecs.open(manager.config_path, 'r', encoding='utf-8') as config_file:
+        with open(manager.config_path, 'r', encoding='utf-8') as config_file:
             try:
                 config = yaml.safe_load(config_file)
             except yaml.error.YAMLError as e:
